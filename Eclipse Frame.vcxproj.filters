@@ -79,6 +79,9 @@
     <MASM Include="LoadIconFromResource.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="SetAsDesktop.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

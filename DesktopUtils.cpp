@@ -22,7 +22,7 @@ static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 }
 
 // Function to create and retrieve the WorkerW layer
-static HWND CreateWorkerWLayer() {
+extern "C" HWND CreateWorkerWLayer() {
     // Get the handle to the Progman window
     HWND progman = FindWindowW(L"Progman", nullptr);
     if (!progman) {
@@ -79,16 +79,4 @@ wchar_t* GetCurrentWallpaper() {
     RegCloseKey(hKey);
 
     return valueBuffer;
-}
-
-// Function to set a window as the desktop background
-void SetAsDesktop(HWND hwnd) {
-    // Call the function to create or retrieve the WorkerW layer
-    HWND workerw = CreateWorkerWLayer(); // Ensure this function is implemented as before
-    if (!workerw) {
-        return;
-    }
-
-    // Set the parent of the target window to WorkerW
-    SetParent(hwnd, workerw);
 }

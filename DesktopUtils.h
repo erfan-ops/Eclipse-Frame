@@ -5,4 +5,4 @@
 
 wchar_t* GetCurrentWallpaper();
 
-void SetAsDesktop(HWND hwnd);
+extern "C" void SetAsDesktop(HWND hwnd);
