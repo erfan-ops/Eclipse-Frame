@@ -1,14 +1,18 @@
 {
-    "fps": 120,
-    "background-colors": [[0, 0, 0, 1], [0.11, 0, 0.21, 1], [0.21, 0, 0.09, 1]],
+  "fps": 120,
+  "background-colors": [
+    [ 0, 0, 0, 1 ],
+    [ 0.11, 0, 0.21, 1 ],
+    [ 0.21, 0, 0.09, 1 ]
+  ],
 
-    "stars": {
-        "count": 180,
-        "max-speed": 20,
-        "line-color": [1, 1, 1, 1],
-        "line-min-width": 1,
-        "line-max-width": 4
-    },
-    "mouse-radius": 150,
-    "stars-line-radius": 220
+  "stars": {
+    "count": 180,
+    "max-speed": 20,
+    "line-color": [ 1, 1, 1, 1 ],
+    "line-min-width": 1,
+    "line-max-width": 4
+  },
+  "mouse-radius": 150,
+  "stars-line-radius": 220
 }

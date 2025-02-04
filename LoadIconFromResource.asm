@@ -2,13 +2,6 @@
 IDI_ICON1       EQU 101
 IMAGE_ICON      EQU 1
 LR_DEFAULTSIZE  EQU 64
-NULL            EQU 0
-
-; Define HANDLE type
-HANDLE typedef QWORD
-
-; Define HICON type
-HICON typedef HANDLE
 
 ; Declare external functions
 externdef GetModuleHandleW:proc
@@ -31,13 +24,12 @@ LoadIconFromResource proc
     ; Call GetModuleHandleW(NULL)
     xor ecx, ecx          ; NULL = 0
     call GetModuleHandleW ; GetModuleHandleW(NULL)
-    mov rbx, rax          ; Save handle in RBX
+    mov rcx, rax          ; Save handle in RBX
 
     ; Ensure stack alignment (sub rsp, 8) before calling LoadImageW
     sub rsp, 8
 
     ; Call LoadImageW
-    mov rcx, rbx          ; hInst (module handle)
     mov rdx, IDI_ICON1    ; lpszName (resource ID)
     mov r8, IMAGE_ICON    ; uType (IMAGE_ICON)
     xor r9, r9            ; cxDesired = 0

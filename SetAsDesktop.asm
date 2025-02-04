@@ -1,6 +1,3 @@
-; Define constants
-NULL EQU 0
-
 ; Declare external functions
 externdef CreateWorkerWLayer:proc
 externdef SetParent:proc
@@ -17,7 +14,6 @@ SetAsDesktop proc
     push rsi
     push rdi
     push rbp
-    mov rbp, rsp
     sub rsp, 20h  ; Allocate shadow space for function calls
 
     ; Save the hwnd parameter (rcx) in a non-volatile register
