@@ -18,7 +18,6 @@ LoadIconFromResource proc
     push rsi
     push rdi
     push rbp
-    mov rbp, rsp
     sub rsp, 30h  ; 32 bytes shadow space + 16 bytes for alignment
 
     ; Call GetModuleHandleW(NULL)
