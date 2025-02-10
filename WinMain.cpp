@@ -195,15 +195,16 @@ int CALLBACK WinMain(
 	// Message loop
 	MSG msg = {};
 	while (running) {
-		// Check for messages
-		checkEvents(msg, running);
-
+		// get deltt time
 		oldF = newF;
 		newF = std::chrono::high_resolution_clock::now();
 		dt = std::chrono::duration<float>(newF - oldF).count();
 
+		// Check for messages
+		checkEvents(msg, running);
+
+		// draw background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//BG::fillGradient(settings.backGroundColors, Width, Height);
 		bg.fillGradient();
 		glLoadIdentity();
 		glOrtho(0, Width, Height, 0, -1, 1);

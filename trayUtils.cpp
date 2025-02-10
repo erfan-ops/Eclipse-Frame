@@ -1,9 +1,6 @@
 #include "trayUtils.h"
 #include "resource.h"
 
-#define WM_TRAYICON (WM_USER + 20)
-#define TRAY_ICON_ID 1
-
 
 // Function to add the tray icon
 void AddTrayIcon(HWND hwnd, HICON hIcon, const std::wstring& tooltip) {

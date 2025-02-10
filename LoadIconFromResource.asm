@@ -18,15 +18,12 @@ LoadIconFromResource proc
     push rsi
     push rdi
     push rbp
-    sub rsp, 30h  ; 32 bytes shadow space + 16 bytes for alignment
+    sub rsp, 38h  ; 32 bytes shadow space + 16 bytes for alignment + 8 bytes for calling LoadImageW
 
     ; Call GetModuleHandleW(NULL)
     xor ecx, ecx          ; NULL = 0
     call GetModuleHandleW ; GetModuleHandleW(NULL)
-    mov rcx, rax          ; Save handle in RBX
-
-    ; Ensure stack alignment (sub rsp, 8) before calling LoadImageW
-    sub rsp, 8
+    mov rcx, rax          ; Save handle in RCX
 
     ; Call LoadImageW
     mov rdx, IDI_ICON1    ; lpszName (resource ID)
@@ -36,11 +33,8 @@ LoadIconFromResource proc
     mov qword ptr [rsp+28h], LR_DEFAULTSIZE ; fuLoad = LR_DEFAULTSIZE
     call LoadImageW       ; LoadImageW(hInst, IDI_ICON1, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE)
 
-    ; Restore stack alignment
-    add rsp, 8
-
     ; Clean up stack and restore registers
-    add rsp, 30h          ; Deallocate shadow space
+    add rsp, 38h          ; Deallocate shadow space
     pop rbp
     pop rdi
     pop rsi

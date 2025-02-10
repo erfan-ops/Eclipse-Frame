@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 #define WM_TRAYICON (WM_USER + 20)
-#define TRAY_ICON_ID 1
+constexpr auto TRAY_ICON_ID = 1;
 
 // Load the icon from resources
 extern "C" HICON LoadIconFromResource();
