@@ -49,7 +49,7 @@ static float randomUniform(float start, float end) {
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<> dist(start, end); // Range [start, end)
 
-	return dist(gen); // Generate the random number
+	return static_cast<float>(dist(gen)); // Generate the random number
 }
 
 static inline void checkEvents(MSG& msg, bool& running) {
@@ -71,7 +71,7 @@ static inline void gameTick(float& frameTime, const float& stepInterval, float& 
 		// Truncate to whole milliseconds
 		int sleepMilliseconds = static_cast<int>(totalSleepTime * 1e+3f);
 
-		// Calculate remaining fractional time and ensure it’s within 0.0f to 1.0f
+		// Calculate remaining fractional time and ensure itï¿½s within 0.0f to 1.0f
 		fractionalTime = (totalSleepTime - sleepMilliseconds * 1e-3f);
 
 		// Sleep for the calculated milliseconds
@@ -253,7 +253,7 @@ int CALLBACK WinMain(
 					float starsDisRatio = (1 - (starsDis / settings.starsLineRadius));
 					float alpha = settings.stars.lineColor[3] * starsDisRatio;
 					float lineWidth = starsDisRatio * DLINE_WIDTH + settings.stars.lineMinWidth;
-					aaline(settings.stars.lineColor[0], settings.stars.lineColor[1], settings.stars.lineColor[2], alpha, star.x, star.y, other.x, other.y, lineWidth);
+					aaline(&settings.stars.lineColor[0], &settings.stars.lineColor[1], &settings.stars.lineColor[2], &alpha, &star.x, &star.y, &other.x, &other.y, &lineWidth);
 				}
 			}
 		}

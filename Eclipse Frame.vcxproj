@@ -145,7 +145,7 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="DesktopUtils.cpp" />
-    <ClCompile Include="rendering.cpp" />
+    <ClCompile Include="rendering.c" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="star.cpp" />
     <ClCompile Include="trayUtils.cpp" />

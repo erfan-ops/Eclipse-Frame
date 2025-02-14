@@ -33,7 +33,7 @@
     <ClCompile Include="star.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering.cpp">
+    <ClCompile Include="rendering.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
