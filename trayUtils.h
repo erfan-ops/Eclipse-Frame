@@ -1,19 +1,24 @@
 #pragma once
 
-#include <iostream>
+#include <stdbool.h>
 #include <Windows.h>
 
 #define WM_TRAYICON (WM_USER + 20)
-constexpr auto TRAY_ICON_ID = 1;
+#define TRAY_ICON_ID 1;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Load the icon from resources
-extern "C" HICON LoadIconFromResource();
+extern HICON LoadIconFromResource();
 
 // Function to add the tray icon
-void AddTrayIcon(HWND hwnd, HICON hIcon, const std::wstring& tooltip);
-
-// Function to remove the tray icon
-void RemoveTrayIcon(HWND hwnd);
+void AddTrayIcon(const HWND* hwnd, const HICON* hIcon, const wchar_t* tooltip);
 
 // Function to handle quit logic
-void OnQuit(HWND& hwnd, bool& running);
+void OnQuit(HWND* hwnd, bool* running);
+
+#ifdef __cplusplus
+}
+#endif

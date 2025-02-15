@@ -35,7 +35,7 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
 			// Handle the menu selection
 			if (selection == 1) {
-				OnQuit(hwnd, running);
+				OnQuit(&hwnd, &running);
 			}
 		}
 	}
@@ -133,7 +133,7 @@ int CALLBACK WinMain(
 	HICON hIcon = LoadIconFromResource();
 
 	// Add the tray icon
-	AddTrayIcon(hwnd, hIcon, L"Just a Simple Icon");
+	AddTrayIcon(&hwnd, &hIcon, L"Just a Simple Icon");
 
 	wchar_t* originalWallpaper = GetCurrentWallpaper();
 
@@ -269,8 +269,6 @@ int CALLBACK WinMain(
 
 	SetParent(hwnd, nullptr);
 	SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (void*)originalWallpaper, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
-
-	RemoveTrayIcon(hwnd);
 
 	wglMakeCurrent(nullptr, nullptr);
 	wglDeleteContext(hglrc);

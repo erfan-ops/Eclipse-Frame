@@ -148,7 +148,7 @@
     <ClCompile Include="rendering.c" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="star.cpp" />
-    <ClCompile Include="trayUtils.cpp" />
+    <ClCompile Include="trayUtils.c" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
