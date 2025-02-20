@@ -12,11 +12,16 @@ Settings loadSettings(const std::string& filename) {
 
 	settings.targetFPS = j["fps"];
 	settings.backGroundColors = j["background-colors"].get<std::vector<std::array<float, 4>>>();
+
+	settings.stars.radius = j["stars"]["radius"];
+	settings.stars.color = j["stars"]["color"].get<std::array<float, 4>>();
 	settings.stars.count = j["stars"]["count"];
 	settings.stars.maxSpeed = j["stars"]["max-speed"];
 	settings.stars.lineColor = j["stars"]["line-color"].get<std::array<float, 4>>();
 	settings.stars.lineMinWidth = j["stars"]["line-min-width"];
 	settings.stars.lineMaxWidth = j["stars"]["line-max-width"];
+	settings.stars.nSegments = j["stars"]["segments"];
+	settings.stars.draw = j["stars"]["draw-stars"];
 
 	settings.mouseRadius = j["mouse-radius"];
 	settings.starsLineRadius = j["stars-line-radius"];

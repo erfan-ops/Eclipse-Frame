@@ -10,11 +10,15 @@ struct Settings {
 	std::vector<std::array<float, 4>> backGroundColors;
 
 	struct Stars {
+		float radius;
+		std::array<float, 4> color;
 		int count;
 		float maxSpeed;
 		std::array<float, 4> lineColor;
 		float lineMinWidth;
 		float lineMaxWidth;
+		int nSegments;
+		bool draw;
 	} stars;
 
 	float mouseRadius;

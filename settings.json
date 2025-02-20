@@ -7,12 +7,17 @@
   ],
 
   "stars": {
+    "radius": 8,
+    "color": [ 1, 1, 1, 1 ],
     "count": 180,
     "max-speed": 20,
     "line-color": [ 1, 1, 1, 1 ],
     "line-min-width": 1,
-    "line-max-width": 4
+    "line-max-width": 4,
+    "segments": 8,
+    "draw-stars": false
   },
+
   "mouse-radius": 150,
   "stars-line-radius": 220
 }

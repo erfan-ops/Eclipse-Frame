@@ -13,7 +13,6 @@
 #include "star.h"
 #include "rendering.h"
 
-
 constinit bool running = true;
 
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -79,13 +78,16 @@ static inline void gameTick(float& frameTime, const float& stepInterval, float& 
 	}
 }
 
+void (Star::* Star::renderFunc)(const int*) const = &Star::realRender;
+
+
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPSTR lpCmdLine,
 	_In_ int nCmdShow)
 {
-	const wchar_t* className = L"HypercubeClass";
+	const wchar_t* className = L"EclipseFrameClass";
 	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
 	wc.style = CS_OWNDC;
@@ -110,7 +112,7 @@ int CALLBACK WinMain(
 	HWND hwnd = CreateWindowEx(
 		WS_EX_TOOLWINDOW,
 		className,
-		L"Hypercube Harmony",
+		L"Eclipse Frame",
 		WS_POPUP,
 		0, 0,
 		Width, Height,
@@ -129,6 +131,13 @@ int CALLBACK WinMain(
 	const float STARS_LINE_RADIUS_SQR = settings.starsLineRadius * settings.starsLineRadius;
 	const float DLINE_WIDTH = settings.stars.lineMaxWidth - settings.stars.lineMinWidth;
 
+	if (settings.stars.draw) {
+		Star::renderFunc = &Star::realRender;
+	}
+	else {
+		Star::renderFunc = &Star::emptyRender;
+	}
+
 	// Load the icon from resources
 	HICON hIcon = LoadIconFromResource();
 
@@ -136,10 +145,6 @@ int CALLBACK WinMain(
 	AddTrayIcon(&hwnd, &hIcon, L"Just a Simple Icon");
 
 	wchar_t* originalWallpaper = GetCurrentWallpaper();
-
-	SetAsDesktop(hwnd);
-
-	ShowWindow(hwnd, SW_SHOW);
 
 	HDC hdc = GetDC(hwnd); // Get device context
 
@@ -182,7 +187,9 @@ int CALLBACK WinMain(
 			randomUniform(roffsetBounds, woffsetBounds),
 			randomUniform(roffsetBounds, hoffsetBounds),
 			randomUniform(-settings.stars.maxSpeed, settings.stars.maxSpeed),
-			randomUniform(-settings.stars.maxSpeed, settings.stars.maxSpeed)
+			randomUniform(-settings.stars.maxSpeed, settings.stars.maxSpeed),
+			settings.stars.radius,
+			settings.stars.color
 		);
 	}
 
@@ -191,6 +198,10 @@ int CALLBACK WinMain(
 	auto endF = std::chrono::high_resolution_clock::now();
 
 	BG bg(settings.backGroundColors, Width, Height);
+
+	SetAsDesktop(hwnd);
+
+	ShowWindow(hwnd, SW_SHOW);
 
 	// Message loop
 	MSG msg = {};
@@ -216,6 +227,8 @@ int CALLBACK WinMain(
 		for (int starIdx = 0; starIdx < settings.stars.count; ++starIdx) {
 			Star& star = stars[starIdx];
 			star.move(dt);
+
+			star.render(&settings.stars.nSegments);
 
 			if (star.orgx < roffsetBounds) {
 				star.speedx = std::abs(star.speedx);
