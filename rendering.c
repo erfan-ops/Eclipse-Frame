@@ -21,6 +21,12 @@ void aaline(const float* r, const float* g, const float* b, const float* a, cons
 
 void filledCircle(const float* centerX, const float* centerY, const float* radius, const float* r, const float* g, const float* b, const float* a, const int* nSegments) {
 	const float nSegments_f = (float)(*nSegments);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+
 	glColor4f(*r, *g, *b, *a);
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(*centerX, *centerY);
