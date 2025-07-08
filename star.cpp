@@ -2,8 +2,8 @@
 #include "rendering.h"
 
 
-Star::Star(float x, float y, float speedx, float speedy, float radius, std::array<float, 4> color)
-    : x(x), y(y), orgx(x), orgy(y), speedx(speedx), speedy(speedy), radius(radius), color(color) {}
+Star::Star(float x, float y, float speed, float angle, float radius, std::array<float, 4> color)
+    : x(x), y(y), orgx(x), orgy(y), speedx(cosf(angle)*speed), speedy(sinf(angle)*speed), radius(radius), color(color) {}
 Star::Star()
     : x(0.0f), y(0.0f), orgx(0.0f), orgy(0.0f), speedx(0.0f), speedy(0.0f), radius(0.0f), color({0.0f, 0.0f , 0.0f , 0.0f}) {}
 

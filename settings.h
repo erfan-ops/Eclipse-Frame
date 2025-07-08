@@ -13,6 +13,7 @@ struct Settings {
 		float radius;
 		std::array<float, 4> color;
 		int count;
+		float minSpeed;
 		float maxSpeed;
 		std::array<float, 4> lineColor;
 		float lineMinWidth;
