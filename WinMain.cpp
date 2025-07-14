@@ -187,15 +187,15 @@ int CALLBACK WinMain(
 	for (int i = 0; i < settings.stars.count; ++i) {
 		Star& star = stars[i];
 		float x = randomUniform(roffsetBounds, woffsetBounds);
-		float y = randomUniform(roffsetBounds, woffsetBounds);
+		float y = randomUniform(roffsetBounds, hoffsetBounds);
 		float speed = randomUniform(settings.stars.minSpeed, settings.stars.maxSpeed);
 		float angle = randomUniform(0, TAU_F);
 		star.x = x;
 		star.y = y;
 		star.orgx = x;
 		star.orgy = y;
-		star.speedx = cosf(angle)*speed;
-		star.speedy = sinf(angle)*speed;
+		star.speedx = std::cosf(angle)*speed;
+		star.speedy = std::sinf(angle)*speed;
 		star.radius = settings.stars.radius;
 		star.color = settings.stars.color;
 	}
@@ -237,17 +237,21 @@ int CALLBACK WinMain(
 
 			star.render(&settings.stars.nSegments);
 
-			if (star.orgx < roffsetBounds) {
+			if (star.orgx < roffsetBounds && star.x < roffsetBounds) {
+				star.orgx -= (star.orgx - roffsetBounds) * 2;
 				star.speedx = std::abs(star.speedx);
 			}
-			else if (star.orgx > woffsetBounds) {
+			else if (star.orgx > woffsetBounds && star.x > woffsetBounds) {
+				star.orgx -= (star.orgx - woffsetBounds) * 2;
 				star.speedx = -std::abs(star.speedx);
 			}
 
-			if (star.orgy < roffsetBounds) {
+			if (star.orgy < roffsetBounds && star.y < roffsetBounds) {
+				star.orgy -= (star.orgy - roffsetBounds) * 2;
 				star.speedy = std::abs(star.speedy);
 			}
-			else if (star.orgy > hoffsetBounds) {
+			else if (star.orgy > hoffsetBounds && star.y > hoffsetBounds) {
+				star.orgy -= (star.orgy - hoffsetBounds) * 2;
 				star.speedy = -std::abs(star.speedy);
 			}
 
